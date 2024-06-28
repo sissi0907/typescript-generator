@@ -12,7 +12,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '11'
 
       - name: Compile the project
         run: mvn test-compile -pl typescript-generator-core -am
@@ -20,11 +20,11 @@ jobs:
       - name: Run tests
         run: mvn -pl typescript-generator-core test -Dtest=cz.habarta.typescript.generator.JsonDeserializationTest#testWithConstructors
         
-      # - name: Set up JDK 8 for NonDex
-      #   uses: actions/setup-java@v2
-      #   with:
-      #     distribution: 'adopt'
-      #     java-version: '8'
+      - name: Set up JDK 8 for NonDex
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
   
       - name: Run NonDex to check for flaky tests
         run: mvn -pl typescript-generator-core edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=cz.habarta.typescript.generator.JsonDeserializationTest#testWithConstructors -DnondexRuns=10
